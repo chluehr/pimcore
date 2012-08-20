@@ -8,6 +8,61 @@ class CreateJS
     private $view;
 
     /**
+     * @var array
+     */
+    private $namespaces = array();
+
+    /**
+     * @param $key string
+     * @param $url string
+     */
+    public function addXmlNamespace($key, $url)
+    {
+        $this->namespaces[$key] = $url;
+    }
+
+    public function getDocumentContainerDiv()
+    {
+        $namespaceElementList = array();
+
+        foreach ($this->namespaces as $namespaceKey => $namespaceUrl) {
+
+            $namespaceElementList[] =
+                'xmlns:' . $namespaceKey . '="' . $namespaceUrl . '"';
+        }
+
+        $containerDiv =
+            '<div '
+            . implode(' ', $namespaceElementList)
+            . ' about="'.$this->getDocumentAbout() . '"'
+            . '>';
+
+        return $containerDiv;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDocumentAbout()
+    {
+        return "http://pimcore/document/1";
+    }
+
+    public function getTag($tag, $propertyKey)
+    {
+
+        /** @var $doc Document_Page */
+        $doc = $this->view->document;
+
+        list($dummy, $key) = explode(':',$propertyKey);
+
+        return
+            '<' . $tag . ' property="' . $propertyKey . '">'
+            . $doc->getElement($key)->getValue()
+            .'</'.$tag.'>';
+    }
+
+    /**
      * @return string
      */
     public function getBoilerplate()

@@ -8,17 +8,15 @@
     <?php
         $createjs = new CreateJS();
         $createjs->setView($this);
+        $createjs->addXmlNamespace('sioc', "http://rdfs.org/sioc/ns#");
+        $createjs->addXmlNamespace('dcterms', "http://purl.org/dc/terms/");
+
         echo $createjs->getBoilerplate();
     ?>
 
 // this to make stuff editable:
-    <div xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:dcterms="http://purl.org/dc/terms/"
-        about="http://pimcore/document/1" rel="dcterms:hasPart" rev="dcterms:partOf" >
-	<h1 property="dcterms:title">Hello World!</h1>
-	<p property="dcterms:content">
-		This is just a simple example page.
-		<br />
-		To learn how to create templates with pimcore, please visit our <a href="http://www.pimcore.org/wiki/" target="_blank">documentation</a> or install the example data package.
-	</p>
-    </div>
+
+    <?php echo $createjs->getDocumentContainerDiv() ?>
+    <?php echo $createjs->getTag('h1', "dcterms:title"); ?>
+    <?php echo $createjs->getTag('p', "dcterms:content"); ?>
 
