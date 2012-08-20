@@ -1,0 +1,6 @@
+# ignore IDE droppings:
+# PhpStorm
+.idea
+
+
+
