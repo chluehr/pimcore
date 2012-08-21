@@ -14,9 +14,23 @@
         echo $createjs->getBoilerplate();
     ?>
 
+
+class DefaultController extends Website_Controller_Action {
+
+	public function defaultAction () {
+
+        $front = Zend_Controller_Front::getInstance();
+        $front->registerPlugin(
+            new CreateJS_Controller_Plugin(), 700
+        );
+	}
+}
+
 // this to make stuff editable:
 
-    <?php echo $createjs->getDocumentContainerDiv() ?>
-    <?php echo $createjs->getTag('h1', "dcterms:title"); ?>
-    <?php echo $createjs->getTag('p', "dcterms:content"); ?>
-
+    <div xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:dcterms="http://purl.org/dc/terms/" about="http://pimcore/document/1">
+        <h1 property="dcterms:title">sample head</h1>
+        <p property="dcterms:content">
+            sample content
+        </p>
+    </div>
