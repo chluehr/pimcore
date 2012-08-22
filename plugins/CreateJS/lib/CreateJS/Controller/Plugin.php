@@ -60,7 +60,6 @@ EOF;
 
         $bodyTag = $html->find('body', 0);
         foreach ($bodyTag->attr as $attrKey => $attrValue) {
-            echo $attrKey.'='.$attrValue;
 
             if (preg_match('/^xmlns:(.+)$/', $attrKey, $match)) {
 

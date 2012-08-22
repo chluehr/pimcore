@@ -12,11 +12,11 @@ class DefaultController extends Website_Controller_Action {
 	public function defaultAction () {
 
         $front = Zend_Controller_Front::getInstance();
-        $front->registerPlugin(
-            new CreateJS_Controller_Plugin(), 1000
-        );
         $front->unregisterPlugin(
             'Pimcore_Controller_Plugin_Frontend_Editmode'
+        );
+        $front->registerPlugin(
+            new CreateJS_Controller_Plugin(), 1000
         );
 	}
 }
@@ -39,4 +39,4 @@ class DefaultController extends Website_Controller_Action {
 - only simple string fields for now
 - pimcore preview works only after save & publish
 - save & publish is still needed after createjs save!
-- what about nested about sections?
+- what about nested "about" sections?
