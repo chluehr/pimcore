@@ -110,7 +110,7 @@ abstract class Pimcore_Controller_Action_Frontend extends Pimcore_Controller_Act
                 
                 // register editmode plugin
                 $front = Zend_Controller_Front::getInstance();
-                //$front->registerPlugin(new Pimcore_Controller_Plugin_Frontend_Editmode($this), 1000);
+                $front->registerPlugin(new Pimcore_Controller_Plugin_Frontend_Editmode($this), 1000);
             }
             else {
                 Zend_Registry::set("pimcore_editmode", false);
