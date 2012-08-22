@@ -15,7 +15,6 @@ class CreateJS_AdminController extends Pimcore_Controller_Action_Admin
 
         $subject = $model['@subject'];
         $type = $model['@type'];
-        $title = $model['<http://purl.org/dc/terms/title>'];
 
         preg_match('/([0-9]+)>$/', $subject, $match);
 
@@ -26,14 +25,9 @@ class CreateJS_AdminController extends Pimcore_Controller_Action_Admin
 
             if (substr($elementKey,0,1) != '@') {
 
-                if (preg_match('@/([a-zA-Z]+)>$@', $elementKey, $match)) {
-
-                    $page->setRawElement($match[1], 'input', $elementValue);
-                    //$page->setRawElement();
-                }
-
-
+                    $page->setRawElement($elementKey, 'input', $elementValue);
             }
+
         }
 
         $page->save();
@@ -41,9 +35,7 @@ class CreateJS_AdminController extends Pimcore_Controller_Action_Admin
         $result = array(
             'error' => null,
             'result' => array(
-                'subject' => 'x',
-                'type' => $type,
-                'title' => $title,
+                'success' => true,
             )
         );
         return $this->_helper->json($result);

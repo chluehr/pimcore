@@ -4,16 +4,8 @@
 
 // TESTING! This plugin is far from being finished!
 
-// put this on the head:
-    <?php
-        $createjs = new CreateJS();
-        $createjs->setView($this);
-        $createjs->addXmlNamespace('sioc', "http://rdfs.org/sioc/ns#");
-        $createjs->addXmlNamespace('dcterms', "http://purl.org/dc/terms/");
-
-        echo $createjs->getBoilerplate();
-    ?>
-
+// 1) modify your Pimcore controller(s) to register the new CreateJS output
+//    plugin and unregister the default Pimcore editmode plugin:
 
 class DefaultController extends Website_Controller_Action {
 
@@ -21,16 +13,30 @@ class DefaultController extends Website_Controller_Action {
 
         $front = Zend_Controller_Front::getInstance();
         $front->registerPlugin(
-            new CreateJS_Controller_Plugin(), 700
+            new CreateJS_Controller_Plugin(), 1000
+        );
+        $front->unregisterPlugin(
+            'Pimcore_Controller_Plugin_Frontend_Editmode'
         );
 	}
 }
 
-// this to make stuff editable:
+// 3) change your templates like this to make stuff editable:
 
-    <div xmlns:sioc="http://rdfs.org/sioc/ns#" xmlns:dcterms="http://purl.org/dc/terms/" about="http://pimcore/document/1">
+<!-- // add namespaces to body(!): -->
+<body xmlns:dcterms="http://purl.org/dc/terms/">
+
+    <!-- // add document about link -->
+    <div about="@document">
         <h1 property="dcterms:title">sample head</h1>
         <p property="dcterms:content">
             sample content
         </p>
     </div>
+
+// NOTES:
+
+- only simple string fields for now
+- pimcore preview works only after save & publish
+- save & publish is still needed after createjs save!
+- what about nested about sections?
