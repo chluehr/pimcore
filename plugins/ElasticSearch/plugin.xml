@@ -10,6 +10,7 @@
         <pluginRevision>1</pluginRevision>
         <pluginBuildTimestamp></pluginBuildTimestamp>
         <pluginClassName>ElasticSearch_Plugin</pluginClassName>
+        <pluginIframeSrc>/plugin/ElasticSearch/admin/settings</pluginIframeSrc>
         <pluginIncludePaths>
             <path>/ElasticSearch/lib</path>
             <path>/ElasticSearch/controllers</path>

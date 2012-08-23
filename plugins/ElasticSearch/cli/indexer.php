@@ -12,8 +12,8 @@ ini_set("max_execution_time", "-1");
 logger::log("ElasticSearch_Plugin: Starting crawl", Zend_Log::DEBUG);
 
 $indexer = new ElasticSearch_Indexer();
-//$indexer->doIndex();
-$indexer->doSearch();
+$indexer->createIndex();
+$indexer->doIndex();
 
 logger::log("ElasticSearch_Plugin: Finished crawl", Zend_Log::DEBUG);
 

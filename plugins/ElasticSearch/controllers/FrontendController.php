@@ -132,7 +132,18 @@ class ElasticSearch_FrontendController extends Website_Controller_Action
 
     public function findAction()
     {
-        $this->view->assign('searchResults', array());
+
+        $queryFromRequest = "".$_REQUEST["query"];
+
+        $searchResults = array();
+
+        if ($queryFromRequest != "") {
+
+            $es = new ElasticSearch();
+            $searchResults = $es->search($queryFromRequest);
+        }
+
+        $this->view->assign('searchResults', $searchResults);
 
         if ($this->_getParam("viewscript")) {
             $this->renderScript($this->_getParam("viewscript"));
